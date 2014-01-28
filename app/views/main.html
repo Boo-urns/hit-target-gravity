@@ -15,11 +15,11 @@
   <!-- <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p> -->
 </div>
 
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" name="form" novalidate role="form">
   <div class="form-group">
     <label for="targetGravity" class="col-md-3 control-label">Target Gravity<br>(post boil)</label>
     <div class="col-md-2">
-      <input type="number" class="form-control" ng-model="userData.target" id="targetGravity" step="0.001" min="1.03">
+      <input type="number" class="form-control" ng-model="userData.targetGravity" id="targetGravity" step="0.001" min="1.03" ng-valid-required>
     </div>
     
   </div>
@@ -40,23 +40,23 @@
   
 
   <div class="form-group">
-    <label class="col-md-3 control-label">Calculated Gravity Units<br>(Target Gravity remove 1. any leading zeros)</label>
+    <label class="col-md-3 control-label">Calculated Gravity Units<br><span class="small">(Target Gravity remove 1. any leading zeros)</span></label>
     <div class="col-md-9">
-      <p class="form-control-static" ng-model="calculated.gu">80</p>
+      <p class="form-control-static">{{calculated.gu}}</p>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="col-md-3 control-label">Total Gravity Units<br>(Calculated Gravity Units * Batch Size)</label>
+    <label class="col-md-3 control-label">Total Gravity Units<br><span class="small">(Calculated Gravity Units * Batch Size)</span></label>
     <div class="col-md-9">
-      <p class="form-control-static" ng-model="calculated.totalGu">400</p>
+      <p class="form-control-static">{{calculated.totalGu}}</p>
     </div>
   </div>
 
    <div class="form-group">
     <label for="targetPreGravity" class="col-md-3 control-label">Target Preboil Gravity</label>
     <div class="col-md-9">
-      <p class="form-control-static" ng-model="calculated.targetPreBoil">1.061</p>
+      <p class="form-control-static">{{calculated.targetPreBoil}}</p>
     </div>
     
   </div>
@@ -69,7 +69,7 @@
       <input type="number" class="form-control" id="preboilGravity" ng-model="userData.preboil">
     </div>
 
-    <label for="temp" class="col-md-2 control-label">Temp of Reading (F)</label>
+    <label for="temp" class="col-md-3 control-label">Temp of Reading (F)</label>
     <div class="col-md-2">
       <input type="number" class="form-control" id="temp" min="80" max="212" ng-model="userData.readingTemp">
     </div>
@@ -80,22 +80,36 @@
 
  <div class="form-group form-inline">
     <label for="preboilGravity" class="col-md-3 control-label">Preboil Gravity should be (with temp adj)</label>
-    <div class="col-md-9">
-      <p class="form-control-static" ng-model="userData.">1.048</p>
+    <div class="col-md-2">
+      <p class="form-control-static">{{calculated.actualReading}}</p>
     </div>
 
-    <label for="actualReading" class="col-md-2 control-label">Actual Reading</label>
+    <label for="actualReading" class="col-md-3 control-label">Actual Reading</label>
     <div class="col-md-2">
-      <input type="number" class="form-control" id="actualReading" min="80" max="212">
+      <p class="form-control-static">{{userData.preboilGravity}}</p>
     </div>
 
   </div>
 
+  <div class="form-group form-inline">
+    <label for="guShort" class="col-md-3 control-label">Gravity Units Short<br><span class="small">per gal</span></label>
+    <div class="col-m-2">
+      <p class="form-control-static" ng-model="calculated.guShort"></p>
+    </div>
 
-  <select class="form-control" id="dme" >
-    <option ng-repeat="maltExt in dme">
-      {{maltExt.dme}} - {{maltExt.ppg}}ppg
-    </option>
-  </select>
+    <label for="dme" class="col-md-3">Dry Malt Extract</label>
+    <div class="col-md-5">
+      <select class="form-control" id="dme">
+        <option ng-repeat="maltExt in dme" value="{{maltExt.ppg}}">
+          {{maltExt.dme}} - {{maltExt.ppg}}ppg
+        </option>
+      </select>
+    </div>
+
+    <label for="dmeAddition" class="col-md-3">DME Addition<br><span class="small">(in lbs)</span></label>
+    <div class="col-m-2">
+      <p class="form-control-static" ng-model="calculated.dmeAddition"></p>
+    </div>
+  
 
 </form>
