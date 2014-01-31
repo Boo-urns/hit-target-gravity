@@ -10,6 +10,8 @@
   });
 
 
+
+
 function MainCtrl ($scope) {
 
   $scope.userData = {};
@@ -20,7 +22,7 @@ function MainCtrl ($scope) {
     targetGravity: 1.080,
     collected: 6.5,
     batchSize: 5,
-    preboil: 1.040,
+    preboil: 1.052,
     readingTemp: 90
   }
 
@@ -64,26 +66,22 @@ function MainCtrl ($scope) {
     {dme: 'Muntons Extra Light', ppg: 37}
   ];
 
+  $scope.malt = $scope.dme[0];
+  console.log($scope.malt);
 
 
-  $scope.$watchCollection('userData', function(){
-    console.log($scope.userData);
+  $scope.$watchCollection('userData', function(user){
+    //console.log(user);
 
-    if( ($scope.userData.targetGravity !== null || $scope.userData.targetGravity !== undefined ) && $scope.userData.collected !== null && $scope.userData.batchSize !== null){
+    if( (user.targetGravity !== null || user.targetGravity !== undefined ) && user.collected !== null && user.batchSize !== null){
       // Calculate Gravity Units
-      var targetStr = $scope.userData.targetGravity.toFixed(3).toString();
+      $scope.calculated.gu = returnGU(user.targetGravity);
       
-      var guPos = targetStr.indexOf("1.0");
-      $scope.calculated.gu = guPos !== -1 ? 
-                              parseInt(targetStr.substring(guPos+3, targetStr.length))
-                              : parseInt(targetStr.substring(2, targetStr.length));
-
-      // Calculate Total Gravity Units
-      // - Calculated Gravity Units * Batch Size
-      $scope.calculated.totalGu = $scope.calculated.gu * $scope.userData.batchSize;
-
+      // Calculate Total Gravity Units - Calculated Gravity Units * Batch Size
+      $scope.calculated.totalGu = $scope.calculated.gu * user.batchSize;
+     // console.log($scope.calculated.totalGu);
       // Calculate Target Preboil
-      var targetPre = Math.round($scope.calculated.totalGu / $scope.userData.collected);
+      var targetPre = Math.round($scope.calculated.totalGu / user.collected);
       targetPre     = (targetPre < 100) ? 
                                     targetPre / 1000
                                    : targetPre / 100;
@@ -92,29 +90,77 @@ function MainCtrl ($scope) {
       $scope.calculated.targetPreBoil = '1.' + target;
     }
 
-    console.log($scope.calculated);
 
 
     // Look at preboil and temp of reading to calculate 
-    if($scope.userData.preboil !== undefined && $scope.userData.readingTemp !== undefined) {
-        //$scope.userData.preboilGravity = $scope.calculated.targetPreBoil - $scope.tempAdj
-        var preboil = $scope.userData.preboil;
-        var temp    = $scope.userData.readingTemp;
+    if(user.preboil !== undefined && user.readingTemp !== undefined) {
+        //user.preboilGravity = $scope.calculated.targetPreBoil - $scope.tempAdj
+        var preboil = user.preboil;
+        var temp    = user.readingTemp;
 
         for(var i=0; i<$scope.tempAdj.length; i++){
-          console.log($scope.tempAdj[i].temp);
+          //console.log($scope.tempAdj[i].temp);
           if($scope.tempAdj[i].temp === temp){
             var adj = $scope.tempAdj[i].adj;
             break;
           }
         }
 
-        $scope.calculated.actualReading = $scope.calculated.targetPreBoil - adj; 
-        $scope.userData.preboilGravity  = $scope.userData.preboil - adj;
+        $scope.calculated.actualReading = parseInt($scope.calculated.targetPreBoil) + adj; 
+        user.preboilGravity  = user.preboil + adj;
        
-        //console.log($scope.tempAdj.temp[$scope.userData.readingTemp]);
+        // calculate GU's short per gal
+        var preGu = returnGU(user.preboilGravity);
+        var preGuShort = preGu * user.collected;
+
+        // calculate estimated FG
+        $scope.calculated.estimatedFG = ((preGuShort / user.batchSize) / 1000) + 1;
+
+        // finish calculated GU's short
+        preGuShort = $scope.calculated.totalGu - preGuShort;
+        preGuShort = preGuShort / user.batchSize;
+        $scope.calculated.guShort = preGuShort;
+
+
+        // Calculate DME addition
+        $scope.calculated.dmeAdd = calcDmeAdd();
 
     }
 
   });
+
+
+  // --- ng-change for selecting what dry malt extract --- \\
+  $scope.dmeSelection = function(){
+    if($scope.userData.preboil !== undefined && $scope.userData.readingTemp !== undefined) {
+       $scope.calculated.dmeAdd = calcDmeAdd();
+    }
+  }
+
+
+  /* --- Calculate Dry Malt Extract Addition --- \\ 
+   * (x * ppg / batch size) = gravity units short per gal
+   */
+  function calcDmeAdd(){
+    // ((x in lbs) * (44ppg (Muntons Light)) / (5 batch size) = 11 // 11 is your guShort per gal
+
+    if($scope.userData.preboil !== undefined && $scope.userData.readingTemp !== undefined) {
+      return   ($scope.calculated.guShort * $scope.userData.batchSize / $scope.malt.ppg).toFixed(2);
+    }
+    return null;
+  }
+
 };
+
+
+function returnGU(gravity) {
+  // Send gravity to returnGU to return the Gravity units (removing 1.0, or 1.)
+  gravity   = gravity.toFixed(3).toString();
+  var guPos = gravity.indexOf("1.0");
+
+  return guPos !== -1 ? 
+                          parseInt(gravity.substring(guPos+3, gravity.length))
+                      :
+                          parseInt(gravity.substring(2, gravity.length)); 
+}
+
