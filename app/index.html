@@ -13,6 +13,7 @@
 
         <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="styles/bootstrap.css">
+        <link rel="stylesheet" href="styles/app.css">
         <!-- endbuild -->
 </head>
   <body ng-app="hitTargetGravityApp">
@@ -25,7 +26,13 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
+    <div class="jumbotron">
+      <h1>Hit your Target Gravity</h1>
+      <p class="lead">
+      Calculator to determine if you will be hitting target gravity and how to adjust!
+      </p>
+      <!-- <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p> -->
+    </div>
     <div class="container" ng-view></div>
  
 
