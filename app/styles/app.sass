@@ -1,5 +1,46 @@
+html, 
+body
+	background: rgb(240,240,240)
+
+
 .jumbotron
-	background: #f5ae02
-	background: linear-gradient(to bottom, #faf3e7 0%,#faf3e7 5%,#faf3e7 5%,#f59702 60%,#f58b02 100%)
-	//background: linear-gradient(to bottom, #f4e6d0 0%,#f58b02 100%)
-	background-size: 100% 225%
+	padding-left: 0
+	background: url(../images/2row-tile.jpg?v=4)
+	max-height: 250px
+	margin-bottom: 0
+	h1
+		color: #2a2a2a
+header
+	background: rgba(230,230,230,0.6)
+	max-width: 800px
+	width: 80%
+	margin-left: 5%
+	
+	h1
+		padding: 10px 25px
+
+	.lead
+		background: rgba(17,17,17,0.8)
+		color: rgba(245,174,2,0.75)
+		padding: 5px 25px
+
+.container
+	margin-top: 0
+	padding-top: 30px
+
+
+label
+	font-weight: normal
+	font-size: 1.15em
+
+.small
+	font-size: .8em
+
+@media only screen and (min-width: 768px) and (max-width: 914px)
+	.jumbotron
+		h1
+			font-size: 2em
+	header
+		max-width: 1000px
+		width: 95%
+
