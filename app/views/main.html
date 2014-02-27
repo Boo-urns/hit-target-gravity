@@ -18,7 +18,7 @@
           
   </fieldset>
   
-  <fieldset class="col-md-6">
+  <fieldset class="col-md-6 calculated">
     <legend>Calculated &mdash; <span class="small">Gravity Units / Target Preboil Gravity</span></legend>
   
     <div class="col-md-4">
@@ -41,11 +41,11 @@
 
 
 
-  <fieldset class="col-md-6 right">
+  <fieldset class="col-md-6">
   <legend>User &mdash; <span class="small">Preboil Gravity / Temp Reading</legend>
     <div class="col-md-4">
-      <label for="preboilGravity" class="control-label">Preboil Gravity Reading</label>
       <input type="number" class="form-control" id="preboilGravity" ng-model="userData.preboil">
+      <label for="preboilGravity" class="control-label">Preboil Gravity Reading</label>
     </div>
     <div class="col-md-4">
       <input type="number" class="form-control" id="temp" min="80" max="212" ng-model="userData.readingTemp">
@@ -57,31 +57,33 @@
 
 
 
-  <fieldset class="col-md-6">
+  <fieldset class="col-md-6 calculated">
   <legend>Calculated &mdash; <span class="small">Preboil / Estimated Final Gravity</legend>
-    <div class="col-md-4">
-      <p class="form-control-static">{{calculated.actualReading}}</p>
-      <label for="preboilGravity" class="control-label">Calculated Preboil Gravity<br><span class="small">(with temp adj)</span></label>
-    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <p class="form-control-static">{{calculated.actualReading}}</p>
+          <label for="preboilGravity" class="control-label">Calculated Preboil Gravity<br><span class="small">(with temp adj)</span></label>
+        </div>
 
-    <div class="col-md-4">
-      <p class="form-control-static">{{userData.preboilGravity}}</p>
-      <label for="actualReading" class="control-label">Your Actual Reading</label>
-    </div>
+        <div class="col-md-6">
+          <p class="form-control-static">{{userData.preboilGravity}}</p>
+          <label for="actualReading" class="control-label">Your Actual Reading</label>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <!-- 
+        MIGHT NOT DISPLAY GRAVITY UNITS SHORT I DON'T THINK THE USER NEEDS THAT INFO.
+        <div class="col-md-6">
+          <p class="form-control-static">{{calculated.guShort}}</p>
+          <label for="guShort" class="control-label">Gravity Units Short<br><span class="small">(per gal)</span></label>
+        </div>
+       -->
+        <div class="col-md-6">
+          <p class="form-control-static"><b>{{calculated.estimatedFG}}</b></p>
+          <label for="estimatedFG" class="control-label">Estimated Final Gravity<br><span class="small">(with no adjustment)</span></label>
+        </div>
 
-    <div class="col-md-4">
-      <!-- <label for="guShort" class="col-md-3 control-label">Gravity Units Short<br><span class="small">per gal</span></label>
-      <div class="col-m-2">
-        <p class="form-control-static">{{calculated.guShort}}</p>
-      </div> -->
-      <p class="form-control-static">{{calculated.guShort}}</p>
-      <label for="guShort" class="control-label">Gravity Units Short<br><span class="small">(per gal)</span></label>
-    </div>
-
-    
-    <div class="col-md-4">
-     <p class="form-control-static"><b>{{calculated.estimatedFG}}</b></p>
-     <label for="estimatedFG" class="col-md-4 control-label">Estimated Final Gravity<br><span class="small">(with no adjustment)</span></label>
     </div>
   </fieldset>
 
@@ -89,7 +91,7 @@
   <fieldset class="col-md-6">
   <legend>Calculated &mdash; <span class="small">DME addition if short</span></legend>
     <div class="col-md-8">
-      <select class="form-control" id="dme" ng-model="malt" ng-change="dmeSelection()" ng-options="d.dme + ' (' + d.ppg + 'ppg)' for d in dme">
+      <select id="dme" ng-model="malt" ng-change="dmeSelection()" ng-options="d.dme + ' (' + d.ppg + 'ppg)' for d in dme">
         </select>
       <label for="dme" class="control-label">Dry Malt Extract</label>
     </div>

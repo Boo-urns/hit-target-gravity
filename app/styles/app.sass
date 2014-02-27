@@ -46,7 +46,7 @@ form
 
 fieldset
 	border: none
-	border-top: 5px solid $orange
+	//border-top: 5px solid $orange
 	margin-bottom: 30px
 	padding-bottom: 20px
 	background: url(../images/lil_fiber.png)
@@ -65,10 +65,88 @@ legend
 label
 	font-weight: normal
 	font-size: 1.25em
+	text-align: right
+	width: 100%
 
+select
+	width: 100%
+	border-radius: 4px
+	height: 34px
+	padding: 6px 12px
+	font-size: 14px
+	line-height: 1.42857
+	color: #555
+	background-color: #fff
+	background-image: none
+	border: 1px solid #ccc
+	border-radius: 4px
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075)
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075)
+
+input
+	border: none
+	border-bottom: 4px solid $orange
+
+.form-control, 
+.form-control-static
+	display: block
+	width: 100%
+	height: 60px
+	padding: 6px 12px
+	font-size: 36px
+	text-align: center
+	line-height: 1.42857
+	color: #555
+	background: none
+	margin-bottom: 10px
+	border: none
+
+.form-control
+	-webkit-box-shadow: none
+	box-shadow: none
+	-webkit-transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s
+	transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s
+	border-bottom: 4px solid $orange
 
 .small
 	font-size: .75em
+
+.calculated 
+	label 
+		text-align: left
+	
+	.col-md-6
+		label
+			text-align: center
+
+
+#calculator
+	background: linear-gradient(to right, #483817 0%, #483817 50%, #383838 50%)
+
+//	-webkit-flex-flow: row wrap
+
+.flex-wrapper
+	display: -webkit-box
+	display: -moz-box
+	display: -ms-flexbox
+	display: -webkit-flex
+	display: flex
+	//width: 100%
+	min-height: 100px
+	background: yellow
+
+.flex-item, 
+.flex-item-other
+	background-color: DeepSkyBlue
+	margin: auto
+	margin: 20px  
+	-webkit-flex: 1
+	padding: 20px
+
+.flex-item-other
+	-webkit-flex: 2
+
+
 
 @media only screen and (min-width: 768px) and (max-width: 914px)
 	.jumbotron
@@ -77,4 +155,8 @@ label
 	header
 		max-width: 1000px
 		width: 95%
+	
 
+@media only screen and (min-width: 768px)
+	.form-inline .form-control
+		width: 100%
