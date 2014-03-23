@@ -6,68 +6,116 @@ $headings-font-weight: 600
 @import "../bower_components/bootstrap-sass/vendor/assets/stylesheets/bootstrap"
 
 
-$orange: rgba(245,174,2,0.75)
+.oswald
+	font-family: 'Oswald', Helvetica Neue, sans-serif
+	font-weight: 300
+
+$orange: #fcbf37
+$blue: #258cb7
+$white: #f0f0f0
 
 html, 
 body
 	background: rgb(240,240,240)
+	background: linear-gradient(to right, #3a3833 0%, #3a3833 49.75%, #f0f0f0 49.75%)	
 
+#header
+	background: $blue
 
 .jumbotron
-	padding-left: 0
-	//background: url(../images/2row-tile.jpg?v=4)
-	max-height: 250px
-	margin-bottom: 0
-
-	h1
-		color: #2a2a2a
-
-header
-	background: rgba(230,230,230,0.6)
-	max-width: 800px
-	width: 80%
-	margin-left: 5%
+	position: relative
+	padding: 0
+	margin-top: 10px
+	background: none
 	
 	h1
+		color: #2a2a2a
+		color: darken($blue, 40%)
+
+header
+	//background: rgba(230,230,230,0.6)
+	margin-top: 40px
+	width: 97.5%
+	-moz-transform: rotate(-2deg)
+	-webkit-transform: rotate(-2deg)
+	-o-transform: rotate(-2deg)
+	-ms-transform: rotate(-2deg)
+	transform: rotate(-2deg)
+
+	h1
 		padding: 10px 25px 5px
+		text-shadow: 2px 2px 0px lighten($blue, 10%)
+	
+	p
+		color: $white
 
-	.lead
-		background: rgba(17,17,17,0.8)
-		color: $orange
-		padding: 5px 25px
+.lead
+	background: none
+	color: $white
+	padding: 5px 30px
+	font-size: 32px
+	@extend .oswald
+	margin-top: 30px
 
+	.small a
+		clear: both
+		color: darken($blue, 20%)
+		font-size: 22px
+		padding: 0 10px
+		font-family: "Quattrocento Sans", Helvetica, sans-serif
+		
 .container
 	margin-top: 0
-	padding-top: 30px
 
+
+
+// SVG
+path
+	fill: $blue
+	stroke: none
+
+#diagonal
+	background: linear-gradient(to right, #3a3833 0%, #3a3833 49.75%, #f0f0f0 49.75%)	
+
+
+#content
+	padding-top: 30px	
+
+.separator
+	border: 2px solid red
 
 form
 	line-height: 1.4em
 	background: #ccc
 
+
 fieldset
 	border: none
-	//border-top: 5px solid $orange
 	margin-bottom: 30px
 	padding-bottom: 20px
 	padding-top: 0
-	background: url(../images/lil_fiber.png)
 	
 legend
 	position: relative
 	width: auto
 	padding: 10px 20px
-	font-size: 32px
-	top: -20px
+	font-size: 36px
 	border: none
-	background: $orange
-	color: #2a2a2a
+	color: $orange
+	text-transform: uppercase
+	@extend .oswald
 
 label
 	font-weight: normal
 	font-size: 1.25em
 	text-align: right
+	text-transform: uppercase
 	width: 100%
+	color: $orange
+
+	
+	.small
+		text-transform: lowercase
 
 select
 	width: 100%
@@ -99,7 +147,7 @@ input
 	font-size: 36px
 	text-align: center
 	line-height: 1.42857
-	color: #555
+	color: #eee
 	background: none
 	margin-bottom: 10px
 	border: none
@@ -119,39 +167,23 @@ input
 	font-size: .75em
 
 .calculated 
+	legend
+		color: $blue
 
 	label 
-		text-align: center
-	
+		text-align: left
+		color: #291f09
+
 	.form-control-static 
-		border-bottom: 4px solid scale-color(#383838, $lightness: 50%)
+		font-size: 44px
+		padding: 0
+		color: $blue
+		border-bottom: 4px solid #291f09
+		border-radius: 4px
 
 #calculator
-	background: linear-gradient(to right, #483817 0%, #483817 50%, #383838 50%)
-
-//	-webkit-flex-flow: row wrap
-
-.flex-wrapper
-	display: -webkit-box
-	display: -moz-box
-	display: -ms-flexbox
-	display: -webkit-flex
-	display: flex
-	//width: 100%
-	min-height: 100px
-	background: yellow
-
-.flex-item, 
-.flex-item-other
-	background-color: DeepSkyBlue
-	margin: auto
-	margin: 20px  
-	-webkit-flex: 1
-	padding: 20px
-
-.flex-item-other
-	-webkit-flex: 2
-
+	//background: linear-gradient(to right, #3a3833 0%, #3a3833 49.75%, #f5ebd7 49.75%)	
+	color: #eee
 
 
 @media only screen and (min-width: 768px) and (max-width: 914px)

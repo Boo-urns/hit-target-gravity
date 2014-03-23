@@ -1,6 +1,7 @@
 <form name="form" novalidate role="form">
+  
   <fieldset class="col-md-6">
-    <legend class="text-right">User Data</legend>
+    <legend class="text-right">User Target</legend>
     <div class="col-md-4">
       <input type="number" class="form-control" ng-model="userData.targetGravity" id="targetGravity" step="0.001" min="1.03" ng-valid-required>
       <label for="targetGravity" class="control-label">Target Gravity<br><span class="small">(post boil)</span></label>
@@ -40,20 +41,21 @@
   </fieldset>
 
 
-
   <fieldset class="col-md-6">
   <legend class="text-right"><span class="small">Preboil Gravity / Temp Reading</legend>
     <div class="col-md-4 col-md-offset-4">
+      <input type="number" class="form-control" min="1.000" step="0.001" id="preboilGravity" ng-model="userData.preboil">
+      <label for="preboilGravity" class="control-label">Preboil Gravity Reading</label>
+    </div>
+
+    <div class="col-md-4">
      <!--  <input type="number" class="form-control" id="temp" min="80" max="212" ng-model="userData.readingTemp">
  -->
        <select id="temp" ng-model="readingTemp" ng-change="tempSelection()"  ng-options="temp.temp + '  &#176;F' for temp in tempAdj">
         </select>
       <label for="temp" class="control-label">Temp of Reading (F)</label>
     </div>
-    <div class="col-md-4">
-      <input type="number" class="form-control" min="1.000" step="0.001" id="preboilGravity" ng-model="userData.preboil">
-      <label for="preboilGravity" class="control-label">Preboil Gravity Reading</label>
-    </div>
+    
 
   </div>
   </fieldset>
@@ -61,7 +63,7 @@
 
 
   <fieldset class="col-md-6 calculated">
-  <legend><span class="small">Calculated &mdash; Preboil / Estimated Final Gravity</span></legend>
+  <legend><span class="small">Preboil / Estimated Final Gravity</span></legend>
     <div class="row">
       <div class="col-md-12">
         <div class="col-md-6">
@@ -91,11 +93,11 @@
   </fieldset>
 
   
-  <fieldset class="col-md-6 col-md-offset-6" ng-hide="calculated.dmeAdd < 0 || calculated.dmeAdd == undefined">
-  <legend><span class="small">Calculated &mdash; DME addition</span></legend>
+  <fieldset class="col-md-6 col-md-offset-6 calculated" ng-hide="calculated.dmeAdd < 0 || calculated.dmeAdd == undefined">
+  <legend><span class="small">DME addition</span></legend>
     <div class="col-md-4">
-      <output for="dme batchSize" class="form-control-static">{{calculated.dmeAdd}} lbs</output>
-      <label for="dmeAddition" class="control-label text-center">DME Addition</label>
+      <output for="dme batchSize" class="form-control-static">{{calculated.dmeAdd}}</output>
+      <label for="dmeAddition" class="control-label text-center">DME Addition<br><span class="small">(in lbs)</span></label>
     </div>
 
     <div class="col-md-8">
