@@ -17,13 +17,7 @@ function MainCtrl ($scope) {
     $scope.calculated = {};
 
   // Setting up a default for now
-    $scope.userData = {
-        targetGravity: 1.080,
-        collected: 6.5,
-        batchSize: 5.25,
-        preboil: 1.052,
-        readingTemp: 90
-    };
+    $scope.userData = {readingTemp: 80};
 
     $scope.tempAdj =  [
         {temp: 80, adj: 0.002},
@@ -62,7 +56,6 @@ function MainCtrl ($scope) {
 
         if( user.targetGravity && user.collected && user.batchSize ){
             // Calculate Gravity Units
-            console.log('calculating gravity units');
             $scope.calculated.gu = returnGU(user.targetGravity);
             
             // Calculate Total Gravity Units - Calculated Gravity Units * Batch Size
@@ -97,7 +90,7 @@ function MainCtrl ($scope) {
 
             $scope.calculated.actualReading = parseFloat($scope.calculated.targetPreBoil) + adj;
             user.preboilGravity  = preboil + adj;
-           
+
             // calculate GU's short per gal
             var preGu = returnGU(user.preboilGravity);
             var preGuShort = preGu * user.collected;
