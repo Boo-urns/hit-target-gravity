@@ -13,11 +13,12 @@ $headings-font-weight: 600
 $orange: #fcbf37
 $blue: #258cb7
 $white: #f0f0f0
+$dark: #3a3833
 
 html, 
 body
-	background: rgb(240,240,240)
-	background: linear-gradient(to right, #3a3833 0%, #3a3833 49.75%, #f0f0f0 49.75%)	
+	background: $white
+	background: linear-gradient(to right, $dark 0%, $dark 49%, $white 49%)	
 
 #header
 	background: $blue
@@ -33,7 +34,6 @@ body
 		color: darken($blue, 40%)
 
 header
-	//background: rgba(230,230,230,0.6)
 	margin-top: 40px
 	width: 97.5%
 	-moz-transform: rotate(-1.75deg)
@@ -75,7 +75,7 @@ path
 	stroke: none
 
 #diagonal
-	background: linear-gradient(to right, #3a3833 0%, #3a3833 49.75%, #f0f0f0 49.75%)	
+	background: linear-gradient(to right, $dark 0%, $dark 49%, $white 49%)	
 
 
 #content
@@ -86,8 +86,6 @@ path
 
 form
 	line-height: 1.4em
-	background: #ccc
-
 
 fieldset
 	border: none
@@ -104,7 +102,9 @@ legend
 	color: $orange
 	text-transform: uppercase
 	@extend .oswald
-
+	line-height: 1.1
+	text-align: right
+	
 label
 	font-weight: normal
 	font-size: 1.25em
@@ -167,8 +167,10 @@ input
 	font-size: .75em
 
 .calculated 
+
 	legend
 		color: $blue
+		text-align: left
 
 	label 
 		text-align: left
@@ -180,11 +182,30 @@ input
 		color: $blue
 		border-bottom: 4px solid #291f09
 		border-radius: 4px
+		position: relative
+		float: left
 
 #calculator
-	//background: linear-gradient(to right, #3a3833 0%, #3a3833 49.75%, #f5ebd7 49.75%)	
+	//background: linear-gradient(to right, $dark 0%, $dark 49.75%, #f5ebd7 49.75%)	
 	color: #eee
 
+@media only screen and (max-width: 991px)
+	html,body,
+	#diagonal
+		background: $dark
+
+	fieldset
+		padding-top: 20px
+	
+	legend, 
+	.calculated legend
+		margin-bottom: 20px
+		text-align: left
+		float: left
+
+	.calculated
+		background: $white
+		width: 100%
 
 @media only screen and (min-width: 768px) and (max-width: 914px)
 	.jumbotron
@@ -193,8 +214,8 @@ input
 	header
 		max-width: 1000px
 		width: 95%
-	
+
 
 @media only screen and (min-width: 768px)
 	.form-inline .form-control
-		width: 100%
+		width: 100%	

@@ -1,38 +1,38 @@
 <form name="form" novalidate role="form">
   
-  <fieldset class="col-md-6">
-    <legend class="text-right">User Target</legend>
-    <div class="col-md-4">
+  <fieldset class="col-xs-12 col-md-6">
+    <legend class="col-xs-12" class="col-xs-12">User Target</legend>
+    <div class="col-xs-6 col-sm-4">
       <input type="number" class="form-control" ng-model="userData.targetGravity" id="targetGravity" step="0.001" min="1.03" ng-valid-required>
       <label for="targetGravity" class="control-label">Target Gravity<br><span class="small">(post boil)</span></label>
     </div>
     
-    <div class="col-md-4">
+    <div class="col-xs-6 col-sm-4">
       <input type="number" class="form-control" id="wortCollected" step="0.01" ng-model="userData.collected">
       <label for="wortCollected" class="control-label">Wort Collected<br><span class="small">(in gal)</span></label>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-xs-6 col-sm-4">
       <input type="number" class="form-control" id="batchSize" ng-model="userData.batchSize">
       <label for="batchSize" class="control-label">Batch Size<br><span class="small">(in gal)</span></label>
     </div>
           
   </fieldset>
   
-  <fieldset class="col-md-6 calculated">
-    <legend>Calculated</legend>
+  <fieldset class="col-xs-12 col-sm-6 calculated">
+    <legend class="col-xs-12">Calculated</legend>
   
-    <div class="col-md-4">
+    <div class="col-xs-6 col-sm-4">
       <output for="targetGravity" id="calculatedGu" class="form-control-static">{{calculated.gu}}</output>
       <label for="calculatedGu" class="control-label">Gravity Units<br><span class="small">(Target Gravity remove 1. any leading zeros)</span></label>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-xs-6 col-sm-4">
       <output for="calculatedGu batchSize" id="calculatedTotalGu" class="form-control-static">{{calculated.totalGu}}</output>
       <label for="calculatedTotalGu" class="control-label">Total Gravity Units<br><span class="small">(Calculated Gravity Units * Batch Size)</span></label>
     </div>
  
-    <div class="col-md-4">
+    <div class="col-xs-6 col-sm-4">
       <output for="calculatedTotalGu wortCollected" id="targetPreGravity" class="form-control-static">{{calculated.targetPreBoil}}</output>
       <label for="targetPreGravity" class="control-label">Target Preboil Gravity</label>
     </div>
@@ -41,14 +41,14 @@
   </fieldset>
 
 
-  <fieldset class="col-md-6">
-  <legend class="text-right"><span class="small">Preboil Gravity / Temp Reading</legend>
-    <div class="col-md-4 col-md-offset-4">
+  <fieldset class="col-sm-6">
+  <legend class="col-xs-12"><span class="small">Preboil Gravity / Temp Reading</legend>
+    <div class="col-xs-6 col-sm-4 col-sm-offset-4">
       <input type="number" class="form-control" min="1.000" step="0.001" id="preboilGravity" ng-model="userData.preboil">
       <label for="preboilGravity" class="control-label">Preboil Gravity Reading</label>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-xs-6 col-sm-4">
      <!--  <input type="number" class="form-control" id="temp" min="80" max="212" ng-model="userData.readingTemp">
  -->
        <select id="temp" ng-model="readingTemp" ng-change="tempSelection()"  ng-options="temp.temp + '  &#176;F' for temp in tempAdj">
@@ -62,29 +62,29 @@
 
 
 
-  <fieldset class="col-md-6 calculated">
-  <legend><span class="small">Preboil / Estimated Final Gravity</span></legend>
+  <fieldset class="col-sm-6 calculated">
+  <legend class="col-xs-12"><span class="small">Preboil / Estimated Final Gravity</span></legend>
     <div class="row">
-      <div class="col-md-12">
-        <div class="col-md-6">
+      <div class="col-sm-12">
+        <div class="col-xs-6 col-sm-6">
           <output for="targetPreGravity " class="form-control-static">{{calculated.actualReading}}</output>
           <label for="preboilGravity" class="control-label">Calculated Preboil Gravity<br><span class="small">(with temp adj)</span></label>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-xs-6 col-sm-6">
           <output for="preboilGravity temp" class="form-control-static" id="actualReading">{{userData.preboilGravity}}</output>
           <label for="actualReading" class="control-label">Your Actual Reading</label>
         </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-xs-12 col-sm-12">
         <!-- 
         MIGHT NOT DISPLAY GRAVITY UNITS SHORT I DON'T THINK THE USER NEEDS THAT INFO.
-        <div class="col-md-6">
+        <div class="col-sm-6">
           <p class="form-control-static">{{calculated.guShort}}</p>
           <label for="guShort" class="control-label">Gravity Units Short<br><span class="small">(per gal)</span></label>
         </div>
        -->
-        <div class="col-md-6">
+        <div class="col-xs-6 col-sm-6">
           <output for="preboilGravity wortCollected batchSize" class="form-control-static" id="estimatedFG"><b>{{calculated.estimatedFG}}</b></output>
           <label for="estimatedFG" class="control-label">Estimated Final Gravity<br><span class="small">(with no adjustment)</span></label>
         </div>
@@ -93,19 +93,20 @@
   </fieldset>
 
   
-  <fieldset class="col-md-6 col-md-offset-6 calculated" ng-hide="calculated.dmeAdd < 0 || calculated.dmeAdd == undefined">
-  <legend><span class="small">DME addition</span></legend>
-    <div class="col-md-4">
-      <output for="dme batchSize" class="form-control-static">{{calculated.dmeAdd}}</output>
-      <label for="dmeAddition" class="control-label text-center">DME Addition<br><span class="small">(in lbs)</span></label>
-    </div>
+  <fieldset class="col-xs-12 col-sm-6 col-sm-offset-6 calculated" ng-hide="calculated.dmeAdd < 0 || calculated.dmeAdd == undefined">
+    <legend class="col-xs-12"><span class="small">DME addition</span></legend>
+    <div class="col-xs-12">
+      <div class="col-sm-4">
+        <output for="dme batchSize" class="form-control-static">{{calculated.dmeAdd}}</output>
+        <label for="dmeAddition" class="control-label text-center">DME Addition<br><span class="small">(in lbs)</span></label>
+      </div>
 
-    <div class="col-md-8">
-      <select id="dme" ng-model="malt" ng-change="dmeSelection()" ng-options="d.dme + ' (' + d.ppg + 'ppg)' for d in dme">
-        </select>
-      <label for="dme" class="control-label text-left">Dry Malt Extract</label>
+      <div class="col-sm-8">
+        <select id="dme" ng-model="malt" ng-change="dmeSelection()" ng-options="d.dme + ' (' + d.ppg + 'ppg)' for d in dme">
+          </select>
+        <label for="dme" class="control-label text-left">Dry Malt Extract</label>
+      </div>
     </div>
-
     
   </fieldset>
 </form>
