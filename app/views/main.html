@@ -65,18 +65,16 @@
   <fieldset class="col-sm-6 calculated">
   <legend class="col-xs-12"><span class="small">Preboil / Estimated Final Gravity</span></legend>
     <div class="row">
-      <div class="col-sm-12">
+        <!--
         <div class="col-xs-6 col-sm-6">
           <output for="targetPreGravity " class="form-control-static">{{calculated.actualReading}}</output>
           <label for="preboilGravity" class="control-label">Calculated Preboil Gravity<br><span class="small">(with temp adj)</span></label>
         </div>
-
-        <div class="col-xs-6 col-sm-6">
+        -->
+        <div class="col-xs-6 col-sm-4">
           <output for="preboilGravity temp" class="form-control-static" id="actualReading">{{userData.preboilGravity}}</output>
-          <label for="actualReading" class="control-label">Your Actual Reading</label>
+          <label for="actualReading" class="control-label">Your Actual Reading<br><span class="small">(with temp adj)</span></label>
         </div>
-      </div>
-      <div class="col-xs-12 col-sm-12">
         <!-- 
         MIGHT NOT DISPLAY GRAVITY UNITS SHORT I DON'T THINK THE USER NEEDS THAT INFO.
         <div class="col-sm-6">
@@ -84,12 +82,11 @@
           <label for="guShort" class="control-label">Gravity Units Short<br><span class="small">(per gal)</span></label>
         </div>
        -->
-        <div class="col-xs-6 col-sm-6">
+        <div class="col-xs-6 col-sm-4">
           <output for="preboilGravity wortCollected batchSize" class="form-control-static" id="estimatedFG"><b>{{calculated.estimatedFG}}</b></output>
           <label for="estimatedFG" class="control-label">Estimated Final Gravity<br><span class="small">(with no adjustment)</span></label>
         </div>
 
-    </div>
   </fieldset>
 
   
