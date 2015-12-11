@@ -37,7 +37,7 @@ function MainCtrl ($scope) {
     ];
 
 
-  
+
     $scope.dme = [
         {dme: 'Briess Pilsen Light', ppg: 44},
         {dme: 'Briess Golden Light', ppg: 43},
@@ -57,7 +57,7 @@ function MainCtrl ($scope) {
         if( user.targetGravity && user.collected && user.batchSize ){
             // Calculate Gravity Units
             $scope.calculated.gu = returnGU(user.targetGravity);
-            
+
             // Calculate Total Gravity Units - Calculated Gravity Units * Batch Size
             $scope.calculated.totalGu = $scope.calculated.gu * user.batchSize;
 
@@ -73,7 +73,7 @@ function MainCtrl ($scope) {
 
 
 
-        // Look at preboil and temp of reading to calculate 
+        // Look at preboil and temp of reading to calculate
         if(user.preboil && user.readingTemp) {
             //user.preboilGravity = $scope.calculated.targetPreBoil - $scope.tempAdj
             var preboil = user.preboil,
@@ -95,8 +95,8 @@ function MainCtrl ($scope) {
             var preGu = returnGU(user.preboilGravity);
             var preGuShort = preGu * user.collected;
 
-            // calculate estimated FG
-            $scope.calculated.estimatedFG = (((preGuShort / user.batchSize) / 1000) + 1).toFixed(3);
+            // calculate estimated OG
+            $scope.calculated.estimatedOG = (((preGuShort / user.batchSize) / 1000) + 1).toFixed(3);
 
             // finish calculated GU's short
             preGuShort = $scope.calculated.totalGu - preGuShort;
@@ -125,7 +125,7 @@ function MainCtrl ($scope) {
     };
 
 
-    /* --- Calculate Dry Malt Extract Addition --- \\ 
+    /* --- Calculate Dry Malt Extract Addition --- \\
      * (x * ppg / batch size) = gravity units short per gal
      */
     function calcDmeAdd(){
@@ -150,4 +150,3 @@ function returnGU(gravity) {
                         :
                             parseInt(gravity.substring(2, gravity.length), 10);
 }
-
