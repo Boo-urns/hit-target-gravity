@@ -17,9 +17,10 @@ function MainCtrl ($scope) {
     $scope.calculated = {};
 
   // Setting up a default for now
-    $scope.userData = {readingTemp: 80};
+    $scope.userData = {readingTemp: 70};
 
     $scope.tempAdj =  [
+			  {temp: 70, adj: 0},
         {temp: 80, adj: 0.002},
         {temp: 90, adj: 0.004},
         {temp: 100, adj: 0.006},
